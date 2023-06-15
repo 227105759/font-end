@@ -1,42 +1,30 @@
-//-----------------------------
-// Date : 7/6
-// Class : SignUp
-//
-//
-//
-//-----------------------------
-
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 
-export default function Signup() {
-  const emailRef = useRef() //for checking the email
+export default function Login() {
+  const emailRef = useRef()//for checking the email
   const passwordRef = useRef()//for checking the password
-  const passwordConfirmRef = useRef()// for checking the password correct or not
-  const { signup } = useAuth()// check the sign up state
+  const { login } = useAuth()// check and change the log on state
   const [error, setError] = useState("")// if error has catehed
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate();// function from 'react-router-dom' to change page
 
-  //function for the web page to handle the register request
+
+  //function for the web page to handel the loginrequest
   async function handleSubmit(e) {
     e.preventDefault()
-
-    //if the password not same as the confirm password
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
-    }
-
+    
     try {
+      //when error has catched will change
       setError("")
       setLoading(true)
-      //if sign up success
-      await signup(emailRef.current.value, passwordRef.current.value)
-      navigate("/login")
+      //if login success
+      await login(emailRef.current.value, passwordRef.current.value)
+      navigate("/")
     } catch {
-      setError("Failed to create accounr")
+      setError("Failed to log in")
     }
 
     setLoading(false)
@@ -46,7 +34,7 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
@@ -57,18 +45,17 @@ export default function Signup() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
-            </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Sign Up
+              Log In
             </Button>
           </Form>
+          <div className="w-100 text-center mt-3">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
+        Need an account? <Link to="/signup">Sign Up</Link>
       </div>
     </>
   )

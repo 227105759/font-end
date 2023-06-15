@@ -1,6 +1,10 @@
-import firebase from 'firebase/compat/app'
-import "firebase/auth"
+// this page for the firebase set up
 
+import firebase from 'firebase/compat/app'
+import "firebase/compat/auth"
+
+
+//the APi keys has renamed for the security reason
 const app = firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMIN,
