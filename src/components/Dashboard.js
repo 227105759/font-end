@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useInsertionEffect } from "react";
+import React, { useState } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-//import { getDatabase, ref, child, get } from "firebase/database";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, firestore } from "../firebase";
 
 export default function Dashboard() {
@@ -12,6 +11,8 @@ export default function Dashboard() {
   const cEmail = currentUser.email;
   const userId = auth.currentUser.uid; //get current user data
   const [userData, setUserData] = useState(null);// set the current user data
+  const [uType, setuType]  = useState('');
+
 
   //for get the current data
   useState(() => {
@@ -21,6 +22,7 @@ export default function Dashboard() {
           const userData = doc.data();
           console.log(userData);
           setUserData(userData);
+          setuType(userData.displayName);
         } else {
           console.log("No such document!");
         }
@@ -32,7 +34,6 @@ export default function Dashboard() {
 
   async function handelLogout() {
     setError("");
-
     try {
       await logout();
       navigate("/login");
@@ -41,10 +42,8 @@ export default function Dashboard() {
     }
   }
 
-  const location = useLocation();
-  // console.log(location.state.uid)
-
-  if (true) {
+  //if is normal user 
+  if (uType === "user") {
     return (
       <>
         <Card>
@@ -58,13 +57,7 @@ export default function Dashboard() {
               Update Profile
             </Link>
             123: {userId}
-              {userData ? (
-                <div>
-                  <p>{userData.displayName}</p>
-                </div>
-              ) : (
-                <p>Loading...</p>
-              )}
+            {/*uType*/}
           </Card.Body>
         </Card>
   
@@ -76,7 +69,18 @@ export default function Dashboard() {
       </>
     );
   } else {
-    
+    // if is the staff account
+    return(
+      <div>
+        staff
+
+        <div className="w-100 text-center mt-2">
+          <Button variant="link" onClick={handelLogout}>
+            Log Out
+          </Button>
+        </div>
+     </div>
+    )
   }
 
 }

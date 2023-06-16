@@ -13,15 +13,16 @@ import { Link, useNavigate } from "react-router-dom"
 import { auth, createUserDocument, database, firestore } from "../firebase"
 
 
-export default function Signup() {
+export default function SignupStaff() {
   const emailRef = useRef() //for checking the email
   const passwordRef = useRef()//for checking the password
   const passwordConfirmRef = useRef()// for checking the password correct or not
+  const signUpCodeRef = useRef()// for checking the staff code corrent or not
   const { signup } = useAuth()// check the sign up state
   const [error, setError] = useState("")// if error has catehed
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const displayName = "user"
+  const displayName = "staff"
   
 
 
@@ -32,6 +33,10 @@ export default function Signup() {
     //if the password not same as the confirm password
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
+    }
+
+    if(signUpCodeRef.current.value !== '4553'){
+        return setError("The sign up code not exits or not correct!!")
     }
 
     try {
@@ -61,7 +66,7 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">User Sign Up</h2>
+          <h2 className="text-center mb-4">Staff Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
@@ -76,6 +81,10 @@ export default function Signup() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
+            <Form.Group id="sign-up-code">
+              <Form.Label>Staff Sign Up Code</Form.Label>
+              <Form.Control type="string" ref={signUpCodeRef} required />
+            </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
               Sign Up
             </Button>
@@ -85,7 +94,7 @@ export default function Signup() {
       <div className="w-100 text-center mt-2">
         Already have an account? <Link to="/login">Log In</Link>
         <br></br>
-        staff Register? <Link to="/signupStaff">Sign up with staff</Link>
+        user Register? <Link to="/signup">Sign up with user</Link>
       </div>
     </>
   )

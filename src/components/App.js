@@ -8,6 +8,8 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
+import SignupStaff from "./SignupStaff";
+
 
 function App() {
 
@@ -23,6 +25,7 @@ function App() {
               <Route path="/" element={<PrivateRoute><Dashboard /> </PrivateRoute>}></Route>
               <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /> </PrivateRoute>}></Route>
               <Route path="/signup" Component={Signup} />
+              <Route path="/signupStaff" Component={SignupStaff} />
               <Route path="/login" Component={Login} />
               <Route path="/forgot-password" Component={ForgotPassword} />
             </Routes>
