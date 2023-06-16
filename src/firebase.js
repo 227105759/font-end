@@ -30,11 +30,12 @@ export const createUserDocument = async (user, additionalData) => {
 
   if (!snapshot.exists) {
     const { email } = user;
-    const { displayName } = additionalData;
+    const { displayName, uType } = additionalData;
 
     try {
       userRef.set({
         displayName,
+        uType,
         email,
         createdAt: new Date(),
         //id: user.uid,

@@ -17,11 +17,12 @@ export default function Signup() {
   const emailRef = useRef() //for checking the email
   const passwordRef = useRef()//for checking the password
   const passwordConfirmRef = useRef()// for checking the password correct or not
+  const displayNameRef = useRef()
   const { signup } = useAuth()// check the sign up state
   const [error, setError] = useState("")// if error has catehed
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const displayName = "user"
+  const uType = "user"
   
 
 
@@ -39,6 +40,7 @@ export default function Signup() {
       setLoading(true)
       //if sign up success
       //await signup(emailRef.current.value, passwordRef.current.value)
+      
       const { user } = await auth.createUserWithEmailAndPassword(
         emailRef.current.value,
         passwordRef.current.value
@@ -46,7 +48,9 @@ export default function Signup() {
         
       //const {user} = await signup(emailRef.current.value, passwordRef.current.value)
       //await createUserDocument(emailRef.current.value,passwordRef.current.value,{displayName})
-      await createUserDocument(user, {displayName});
+
+      const displayName = displayNameRef.current.value
+      await createUserDocument(user, {displayName,uType });
       
       //setError( user.current.value)
       navigate("/login")
@@ -75,6 +79,10 @@ export default function Signup() {
             <Form.Group id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
+            </Form.Group>
+            <Form.Group id="display-Name">
+              <Form.Label>User Name</Form.Label>
+              <Form.Control type="string" ref={displayNameRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
               Sign Up

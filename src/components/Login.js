@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { firestore, auth } from "../firebase";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 export default function Login() {
   const emailRef = useRef(); //for checking the email
@@ -11,8 +12,30 @@ export default function Login() {
   const [error, setError] = useState(""); // if error has catehed
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // function from 'react-router-dom' to change page
-
   const [userData, setUserData] = useState(null); // set the current user data
+
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const SignIn = () => {
+    const [signInWithEmailAndPassword, user, loading, error] =
+      useSignInWithEmailAndPassword(auth);
+      console.log()
+  };
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+
+
   //const userRef = firestore.doc(`users/${emailRef.uid}`);
 
   //function for the web page to handel the loginrequest
@@ -25,10 +48,6 @@ export default function Login() {
       setLoading(true);
       //if login success
       await login(emailRef.current.value, passwordRef.current.value);
-      //console.log(userData.displayName)
-
-      //const snapshot = await userRef.get();
-      //MyComponent()
       navigate("/");
     } catch {
       setError("Failed to log in");
@@ -36,7 +55,6 @@ export default function Login() {
     setLoading(false);
 
 
-    
   }
 
   return (
@@ -48,11 +66,21 @@ export default function Login() {
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control
+                type="email"
+                ref={emailRef}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control
+                type="password"
+                ref={passwordRef}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
               Log In
