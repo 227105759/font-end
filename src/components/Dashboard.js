@@ -90,6 +90,7 @@ export default function Dashboard() {
           </Button>
             */
           }
+                <Link to="/chat">Chat</Link>
         </div>
       </>
     );
@@ -117,7 +118,7 @@ export default function Dashboard() {
             api
           </Button>
           */}
-
+      <Link to="/chat">Chat</Link>
 
         </div>
      </div>

@@ -10,6 +10,7 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import SignupStaff from "./SignupStaff";
 import CatList from "./CatList";
+import Chat from "./Chat";
 
 
 
@@ -31,6 +32,7 @@ function App() {
               <Route path="/login" Component={Login} />
               <Route path="/forgot-password" Component={ForgotPassword} />
               <Route path="/catlist" Component={CatList}/>
+              <Route path="/chat" Component={Chat}/>
             </Routes>
           </AuthProvider>
         </Router>

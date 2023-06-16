@@ -95,7 +95,8 @@ export default function Login() {
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
 
-      <Link to="/catlist">Sign Up</Link>
+      <Link to="/catlist">List</Link>
+
     </>
   );
 }
