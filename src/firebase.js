@@ -3,7 +3,9 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import "firebase/compat/storage"
+import "firebase/compat/storage";
+import { GoogleAuthProvider } from "@firebase/auth";
+
 import { getDatabase, ref, set } from "firebase/database";
 
 //the APi keys has renamed for the security reason
@@ -20,6 +22,7 @@ export const auth = app.auth();
 export const firestore = app.firestore();
 export const database = getDatabase();
 export const storage = app.storage();
+export const provider = new GoogleAuthProvider();
 export default app;
 
 

@@ -96,6 +96,7 @@ export default function Login() {
       </div>
 
       <Link to="/catlist">List</Link>
+      <Link to="/login-google">google</Link>
 
     </>
   );

@@ -11,6 +11,7 @@ import UpdateProfile from "./UpdateProfile";
 import SignupStaff from "./SignupStaff";
 import CatList from "./CatList";
 import Chat from "./Chat";
+import LoginGoogle from "./LoginGoogle";
 
 
 
@@ -33,6 +34,7 @@ function App() {
               <Route path="/forgot-password" Component={ForgotPassword} />
               <Route path="/catlist" Component={CatList}/>
               <Route path="/chat" Component={Chat}/>
+              <Route path="/login-google" Component={LoginGoogle}/>
             </Routes>
           </AuthProvider>
         </Router>

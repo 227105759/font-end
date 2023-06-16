@@ -59,7 +59,7 @@ export default function Dashboard() {
  // }
 
   //if is normal user 
-  if (uType === "user") {
+  if (uType === "staff") {
     return (
       <>
         <Card>
