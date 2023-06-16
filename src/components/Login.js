@@ -11,27 +11,32 @@ export default function Login() {
   const [error, setError] = useState(""); // if error has catehed
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // function from 'react-router-dom' to change page
+
+  const [userData, setUserData] = useState(null); // set the current user data
   //const userRef = firestore.doc(`users/${emailRef.uid}`);
-  
 
   //function for the web page to handel the loginrequest
   async function handleSubmit(e) {
     e.preventDefault();
-
+    //for get the current data
     try {
       //when error has catched will change
       setError("");
       setLoading(true);
       //if login success
       await login(emailRef.current.value, passwordRef.current.value);
+      //console.log(userData.displayName)
+
       //const snapshot = await userRef.get();
-      
       //MyComponent()
       navigate("/");
     } catch {
       setError("Failed to log in");
     }
     setLoading(false);
+
+
+    
   }
 
   return (

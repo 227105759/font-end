@@ -10,7 +10,8 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import { auth, createUserDocument, database } from "../firebase"
+import { auth, createUserDocument, database, firestore } from "../firebase"
+
 
 export default function Signup() {
   const emailRef = useRef() //for checking the email
@@ -21,6 +22,7 @@ export default function Signup() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const displayName = "no"
+  
 
 
   //function for the web page to handle the register request
