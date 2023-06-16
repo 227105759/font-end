@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import SignupStaff from "./SignupStaff";
+import CatList from "./CatList";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="/signupStaff" Component={SignupStaff} />
               <Route path="/login" Component={Login} />
               <Route path="/forgot-password" Component={ForgotPassword} />
+              <Route path="/CatList" Component={CatList} />
             </Routes>
           </AuthProvider>
         </Router>

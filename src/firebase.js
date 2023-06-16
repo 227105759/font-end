@@ -3,6 +3,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import "firebase/compat/storage"
 import { getDatabase, ref, set } from "firebase/database";
 
 //the APi keys has renamed for the security reason
@@ -18,6 +19,7 @@ const app = firebase.initializeApp({
 export const auth = app.auth();
 export const firestore = app.firestore();
 export const database = getDatabase();
+export const storage = app.storage();
 export default app;
 
 
