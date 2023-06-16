@@ -4,6 +4,7 @@ import firebase from "firebase/compat/app";
 import SendMessage from './SendMessage.js'
 
 
+
 export default function Chat() {
     const scroll = useRef()
     const [messages, setMessages] = useState([])

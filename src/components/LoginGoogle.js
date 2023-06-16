@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function LoginGoogle() {
 
   const [user, setUser] = useState(null);
-  const uType = "user"
+  //const uType = "user"
   const navigate = useNavigate(); // function from 'react-router-dom' to change page
 
    const handleGoogleSignIn=()=>{

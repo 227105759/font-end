@@ -23,7 +23,7 @@ export default function SignupStaff() {
   const [error, setError] = useState("")// if error has catehed
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const uType = "user"
+  const uType = "staff"
   
 
 

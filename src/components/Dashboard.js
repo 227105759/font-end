@@ -33,7 +33,7 @@ export default function Dashboard() {
           const userData = doc.data();
           console.log(userData);
           setUserData(userData);
-          setuType(userData.displayName);
+          setuType(userData.uType);
         } else {
           console.log("No such document!");
         }
@@ -99,7 +99,7 @@ export default function Dashboard() {
     return(
       <div>
         staff
-
+      {uType}
         <div className="w-100 text-center mt-2">
           <Button variant="link" onClick={handelLogout}>
             Log Out
