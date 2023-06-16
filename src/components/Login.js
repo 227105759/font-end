@@ -1,36 +1,37 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useNavigate } from "react-router-dom"
+import React, { useRef, useState, useEffect } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { firestore, auth } from "../firebase";
 
 export default function Login() {
-  const emailRef = useRef()//for checking the email
-  const passwordRef = useRef()//for checking the password
-  const { login } = useAuth()// check and change the log on state
-  const [error, setError] = useState("")// if error has catehed
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate();// function from 'react-router-dom' to change page
-
+  const emailRef = useRef(); //for checking the email
+  const passwordRef = useRef(); //for checking the password
+  const { login } = useAuth(); // check and change the log on state
+  const [error, setError] = useState(""); // if error has catehed
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // function from 'react-router-dom' to change page
+  //const userRef = firestore.doc(`users/${emailRef.uid}`);
+  
 
   //function for the web page to handel the loginrequest
   async function handleSubmit(e) {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     try {
       //when error has catched will change
-      setError("")
-      setLoading(true)
+      setError("");
+      setLoading(true);
       //if login success
-      await login(emailRef.current.value, passwordRef.current.value)
-
-
-
-      navigate("/")
+      await login(emailRef.current.value, passwordRef.current.value);
+      //const snapshot = await userRef.get();
+      
+      //MyComponent()
+      navigate("/");
     } catch {
-      setError("Failed to log in")
+      setError("Failed to log in");
     }
-
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -61,5 +62,5 @@ export default function Login() {
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
     </>
-  )
+  );
 }

@@ -3,6 +3,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { getDatabase, ref, set } from "firebase/database";
 
 //the APi keys has renamed for the security reason
 const app = firebase.initializeApp({
@@ -16,7 +17,9 @@ const app = firebase.initializeApp({
 
 export const auth = app.auth();
 export const firestore = app.firestore();
+export const database = getDatabase();
 export default app;
+
 
 export const createUserDocument = async (user, additionalData) => {
   if (!user) return;
@@ -34,7 +37,19 @@ export const createUserDocument = async (user, additionalData) => {
         displayName,
         email,
         createdAt: new Date(),
+        //id: user.uid,
       });
+
+      userRef.get({
+        email
+      })
+
+      
+      const data = {uid : user.uid}
+      localStorage.setItem('uid', JSON.stringify(data));
+      console.log(data)
+    
+
     } catch (error) {
       console.log("Error in creating user", error);
     }

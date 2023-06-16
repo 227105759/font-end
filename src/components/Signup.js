@@ -10,7 +10,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import { auth, createUserDocument } from "../firebase"
+import { auth, createUserDocument, database } from "../firebase"
 
 export default function Signup() {
   const emailRef = useRef() //for checking the email
@@ -37,7 +37,6 @@ export default function Signup() {
       setLoading(true)
       //if sign up success
       //await signup(emailRef.current.value, passwordRef.current.value)
-      
       const { user } = await auth.createUserWithEmailAndPassword(
         emailRef.current.value,
         passwordRef.current.value
@@ -46,6 +45,7 @@ export default function Signup() {
       //const {user} = await signup(emailRef.current.value, passwordRef.current.value)
       //await createUserDocument(emailRef.current.value,passwordRef.current.value,{displayName})
       await createUserDocument(user, {displayName});
+      
       //setError( user.current.value)
       //navigate("/login")
     } catch {

@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getDatabase, ref, child, get } from "firebase/database";
+//import { firestore } from "../firebase"; 
+//import { uids } from "../firebase";
 
 export default function Dashboard() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
   const cEmail = currentUser.email;
+  //const a = currentUser.uids;
+  //const userRef = firestore.doc(`users/${user.uid}`);
+  //const user = currentUser.email
 
   async function handelLogout() {
     setError("");
@@ -21,6 +26,8 @@ export default function Dashboard() {
     }
   }
 
+  const location = useLocation()
+ // console.log(location.state.uid)
 
   const Getdata = () => {
     const dbRef = ref(getDatabase());
@@ -52,6 +59,7 @@ export default function Dashboard() {
           <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
             Update Profile
           </Link>
+          123: {}
         </Card.Body>
       </Card>
 
