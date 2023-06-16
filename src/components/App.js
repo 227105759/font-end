@@ -12,6 +12,7 @@ import SignupStaff from "./SignupStaff";
 import CatList from "./CatList";
 
 
+
 function App() {
 
   return (
@@ -29,7 +30,7 @@ function App() {
               <Route path="/signupStaff" Component={SignupStaff} />
               <Route path="/login" Component={Login} />
               <Route path="/forgot-password" Component={ForgotPassword} />
-              <Route path="/CatList" Component={CatList} />
+              <Route path="/catlist" Component={CatList}/>
             </Routes>
           </AuthProvider>
         </Router>

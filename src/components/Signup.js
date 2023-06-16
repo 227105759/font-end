@@ -24,6 +24,7 @@ export default function Signup() {
   const navigate = useNavigate()
   const uType = "user"
   
+  
 
 
   //function for the web page to handle the register request

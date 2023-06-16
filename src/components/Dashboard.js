@@ -16,13 +16,13 @@ export default function Dashboard() {
   const [uType, setuType]  = useState('');
   const [backendDate, setBackendData] = useState([{}])
 
-  useEffect(() => {
-    fetch("/api").then(
-      response => response.json()
-    ).then(data =>{
-      setBackendData(data)
-    })
-  }, [])
+  //useEffect(() => {
+    //fetch("/api").then(
+     // response => response.json()
+  //  ).then(data =>{
+   //  setBackendData(data)
+  //  })
+ // }, [])
 
 
   //for get the current data
@@ -53,10 +53,10 @@ export default function Dashboard() {
     }
   }
   
-  const callApi = async () =>{
-    const token = await userData.getIdToken();
-    console.log(token);
-  }
+  //const callApi = async () =>{
+   // const token = await userData.getIdToken();
+   // console.log(token);
+ // }
 
   //if is normal user 
   if (uType === "user") {
@@ -82,9 +82,14 @@ export default function Dashboard() {
             Log Out
           </Button>
 
-          <Button onClick={callApi}>
+          {
+            /*
+            
+                      <Button onClick={callApi}>
             api
           </Button>
+            */
+          }
         </div>
       </>
     );
@@ -100,7 +105,8 @@ export default function Dashboard() {
           </Button>
 
 
-          {(typeof backendDate.pet === 'undefined')?(
+          {/*
+                    {(typeof backendDate.pet === 'undefined')?(
             <p>loading</p>
           ):(
             backendDate.pet.map((pet, i) =>(
@@ -110,6 +116,7 @@ export default function Dashboard() {
                     <Button onClick={callApi}>
             api
           </Button>
+          */}
 
 
         </div>
