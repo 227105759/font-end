@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import Navbar from "../Ui/Navbar";
 
 export default function Login() {
   const emailRef = useRef(); //for checking the email
@@ -58,7 +59,9 @@ export default function Login() {
   }
 
   return (
+    
     <>
+
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Log In</h2>
@@ -94,10 +97,8 @@ export default function Login() {
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
+      <Link to="/login-google">Sign in With google</Link>
 
-      <Link to="/catlist">List</Link>
-      <Link to="/login-google">google</Link>
-      <Link to="/cat-backend">backend</Link>
 
     </>
   );

@@ -15,17 +15,18 @@ import CatList from "./CatList";
 import Chat from "./Chat";
 import LoginGoogle from "./LoginGoogle";
 import CatBackend from "./CatBackend";
+import CatEdit from "./CatEdit";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Router>
+      <Router>
+        <Navbar />
+        <Container
+          className="d-flex align-items-center justify-content-center"
+          style={{ minHeight: "100vh" }}
+        >
+          <div className="w-100" style={{ maxWidth: "400px" }}>
             <AuthProvider>
               <Routes>
                 <Route
@@ -52,11 +53,12 @@ function App() {
                 <Route path="/chat" Component={Chat} />
                 <Route path="/login-google" Component={LoginGoogle} />
                 <Route path="/cat-backend" Component={CatBackend} />
+                <Route path="/catEdit" Component={CatEdit} />
               </Routes>
             </AuthProvider>
-          </Router>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </Router>
     </>
   );
 }
