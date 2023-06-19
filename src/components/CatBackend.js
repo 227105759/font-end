@@ -126,30 +126,8 @@ export default function CatBackend() {
   };
 
   //add fav
-  const handleFavorite = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append("cid", cid);
-
-    try {
-      const response = await fetch("http://localhost:3001/api/add-favorite", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Cat added:", data.catId);
-
-        // Reset the form fields
-        setCid();
-      } else {
-        console.error("Error adding cat with respond");
-      }
-    } catch (error) {
-      console.error("Error adding cat:", error);
-    }
+  const handleFavorite = (cat) => {
+    navigate("/favorite", { state: { cat: cat } });
   };
 
   //delete
@@ -161,13 +139,11 @@ export default function CatBackend() {
     if (response.ok) {
       setCatData(catData.filter((cat) => cat.id !== cid));
     } else {
-       //Handle error
+      //Handle error
     }
   };
 
-  const handleEdit = (cat) => {
-    navigate("/catEdit", { state: { cat: cat } });
-  };
+  const handleEdit = (cat) => {};
 
   if (uType === "staff") {
     return (
@@ -227,7 +203,10 @@ export default function CatBackend() {
                     value={items.id}
                     onChange={(event) => setCid(event.target.value)}
                   />
-                  <IconButton aria-label="add to favorites" type="submit">
+                  <IconButton
+                    aria-label="add to favorites"
+                    onClick={() => handleFavorite(items)}
+                  >
                     <FavoriteIcon />
                   </IconButton>
                 </form>
@@ -235,12 +214,12 @@ export default function CatBackend() {
             </Card>
             <button onClick={() => handleEdit(items)}>Edit</button>
             <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => handleDelete(items.id)}
-          >
-            Delete
-          </Button>
+              variant="contained"
+              color="secondary"
+              onClick={() => handleDelete(items.id)}
+            >
+              Delete
+            </Button>
           </div>
         ))}
       </>

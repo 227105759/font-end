@@ -17,7 +17,7 @@ import { useNavigate } from "react-router";
 import { auth } from "../firebase";
 
 
-const pages = ['cat-backend', 'Pricing', 'Blog'];
+const pages = ['cat-backend', 'catlist', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {

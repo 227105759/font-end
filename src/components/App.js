@@ -16,6 +16,7 @@ import Chat from "./Chat";
 import LoginGoogle from "./LoginGoogle";
 import CatBackend from "./CatBackend";
 import CatEdit from "./CatEdit";
+import Favorite from "./Favorite";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
                 <Route path="/login-google" Component={LoginGoogle} />
                 <Route path="/cat-backend" Component={CatBackend} />
                 <Route path="/catEdit" Component={CatEdit} />
+                <Route path="/favorite" Component={Favorite} />
               </Routes>
             </AuthProvider>
           </div>

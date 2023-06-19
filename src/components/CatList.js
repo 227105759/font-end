@@ -23,15 +23,15 @@ export default function CatList() {
     /* Fetch ------------------------------------------- */
   }
   useEffect(() => {
-    firestore.collection("cats").orderBy("datetime", "desc").onSnapshot((snapshot) => {
+    firestore.collection("favorite").onSnapshot((snapshot) => {
         setUsers(
           snapshot.docs.map((doc) => {
             return {
-              id: doc.id,
+              //id: doc.id,
               title: doc.data().title,
               age: doc.data().age,
-              image: doc.data().images,
-              datetime: doc.data().datetime,
+              //image: doc.data().images,
+             //datetime: doc.data().datetime,
             };
           })
         );
@@ -110,26 +110,15 @@ export default function CatList() {
 
   return (<>
     <div className="App">
-      <h1> Cat List </h1>
-      <div className="wrapper">
-        {/* Insert users -------------------------------------------*/}
-        <form onSubmit={addlist}>
-          <input type="text" id="title"  name="title" value={catInfo.title} onChange={onChangeValue} placeholder=" Title " required />
-          <input type="number" id="age"  name="age" value={catInfo.age} onChange={onChangeValue} placeholder=" Age " required />
-          <input type="file" accept=".png, .jpg, .jpeg" onChange={handleImageAsFile}/>
-          <button type="submit" className="btn__default btn__add" > Upload </button>  
-        </form>
-      </div>
-      {/* Fetch users ------------------------------------------------*/}
+      <h1> Favorite Cat List </h1>
+      {/* Fetch cats ------------------------------------------------*/}
       {isUsers.map((items,index) => (
         <div key={items.id} >
         <div className="wrapper__list">
           <p><b> Title : </b> {items.title}</p>
           <p><b> Age : </b> {items.age}</p>
           <img src={items.image} alt=""/>
-          <input type="number" id="age"  name="age" value={catInfo.age} onChange={onChangeValue} placeholder=" Age " required />
           <button onClick={() =>deletList(items.id)}>Delete</button>
-          <button onClick={() =>editList(items.id)}>Update</button>
         </div>    
       </div>
       ))}
