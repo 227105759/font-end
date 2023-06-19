@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Navbar from "../Ui/Navbar";
+import EmailIcon from "@mui/icons-material/Email";
+import ForwardIcon from "@mui/icons-material/Forward";
 
 export default function Login() {
   const emailRef = useRef(); //for checking the email
@@ -15,13 +17,12 @@ export default function Login() {
   const navigate = useNavigate(); // function from 'react-router-dom' to change page
   const [userData, setUserData] = useState(null); // set the current user data
 
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const SignIn = () => {
     const [signInWithEmailAndPassword, user, loading, error] =
       useSignInWithEmailAndPassword(auth);
-      console.log()
+    console.log();
   };
 
   if (error) {
@@ -34,8 +35,6 @@ export default function Login() {
   if (loading) {
     return <p>Loading...</p>;
   }
-
-
 
   //const userRef = firestore.doc(`users/${emailRef.uid}`);
 
@@ -54,14 +53,14 @@ export default function Login() {
       setError("Failed to log in");
     }
     setLoading(false);
-
-
   }
 
-  return (
-    
-    <>
+  const handleEmail = () => {
+    navigate("/login-google");
+  };
 
+  return (
+    <>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Log In</h2>
@@ -94,12 +93,15 @@ export default function Login() {
           </div>
         </Card.Body>
       </Card>
+
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
-      <Link to="/login-google">Sign in With google</Link>
 
-
+      <div className="w-100 text-center mt-2">
+        Sign in With google <ForwardIcon></ForwardIcon>{" "}
+        <EmailIcon onClick={handleEmail}></EmailIcon>
+      </div>
     </>
   );
 }

@@ -21,6 +21,7 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import MessageIcon from "@mui/icons-material/Message";
 
 export default function CatBackend() {
   const [isUsers, setUsers] = useState([]);
@@ -143,7 +144,13 @@ export default function CatBackend() {
     }
   };
 
-  const handleEdit = (cat) => {};
+  const handleChat = () => {
+    navigate("/chat");
+  };
+
+  const handleEdit = (cat) => {
+    navigate("/catEdit", { state: { cat: cat } });
+  };
 
   if (uType === "staff") {
     return (
@@ -209,6 +216,7 @@ export default function CatBackend() {
                   >
                     <FavoriteIcon />
                   </IconButton>
+                  <MessageIcon onClick={handleChat}></MessageIcon>
                 </form>
               </CardActions>
             </Card>
@@ -246,9 +254,13 @@ export default function CatBackend() {
                 <b> Age : </b> {items.age}
               </CardContent>
               <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" type="submit">
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => handleFavorite(items)}
+                >
                   <FavoriteIcon />
                 </IconButton>
+                <MessageIcon onClick={handleChat}></MessageIcon>
               </CardActions>
             </Card>
           </div>
